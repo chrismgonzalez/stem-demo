@@ -18,23 +18,23 @@ This demo used CloudFormation to deploy the necessary infrastructure that includ
 
 * You have an active AWS account, you can create one [here](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all)
 * Your user or IAM instance role (if you're using an EC2/Cloud9 instance) has proper IAM permissions to write to the Iot Data endpoint
-  * You will need this policy:
+   
     ```json
     {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "iot:Connect",
-                "iot:Publish",
-                "iot:GetThingShadow",
-                "iot:UpdateThingShadow",
-            ],
-            "Resource": "*"
-        }
-    ]
-}
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "iot:Connect",
+                    "iot:Publish",
+                    "iot:GetThingShadow",
+                    "iot:UpdateThingShadow",
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
     ```
 * Your runtime environment (the computer or device you are running this program on) has [Python3 and Pip3 installed]. If you're using a fairly new computer, you probably already have a recent version of Python installed.
   * On a mac `which python3` and `which pip3`
