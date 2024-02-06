@@ -68,8 +68,6 @@ aws sts get-caller-identity
 
 aws iot describe-endpoint
 # <endpoint_id>.iot.<region>.amazonaws.com
-
-
 ```
 
 ## Running the code
@@ -88,4 +86,7 @@ aws iot describe-endpoint
 
 ## Supporting documentation
 
-* Coming soon
+* [IAM Setup](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-set-up.html)
+* [Configure IoT core device](https://docs.aws.amazon.com/iot/latest/developerguide/configure-device.html)
+* [Amazon Timestream](https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html)
+* [Grafana Cloud](https://grafana.com/products/cloud/)
