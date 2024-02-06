@@ -10,9 +10,34 @@ Inspiration for this demo was sourced from an existing `awslabs` Github repo whi
 
 This demo used CloudFormation to deploy the necessary infrastructure that includes:
 
-* An AWS Timeseries database and database table
-* A an Iot topic rule
-* An IAM role to allow the AWS IoT service to write data to AWS Timeseries on your behalf
+* An AWS Timeseries database and database table.
+* An Iot topic rule.
+* An IAM role to allow the AWS IoT service to write data to AWS Timeseries on your behalf.
+
+## Pre-requisites
+
+* You have an active AWS account, you can create one [here](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all)
+* Your user or IAM instance role (if you're using an EC2/Cloud9 instance) has proper IAM permissions to write to the Iot Data endpoint
+  * You will need this policy:
+    ```json
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iot:Connect",
+                "iot:Publish",
+                "iot:GetThingShadow",
+                "iot:UpdateThingShadow",
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+    ```
+* Your runtime environment (the computer or device you are running this program on) has [Python3 and Pip3 installed]. If you're using a fairly new computer, you probably already have a recent version of Python installed.
+  * On a mac `which python3` and `which pip3`
 
 ## IaC deployment
 
@@ -20,6 +45,32 @@ This demo used CloudFormation to deploy the necessary infrastructure that includ
 * Change the dimensions and SQL of the data rule to match your use case (reference lines 19-66 of `cfn-iot-rule-to-timestream.json`)
 * Specify stack details and options for your deployment and create the stack.
 * Optional but not provided: use Cloudformation to also create AWS Cloud9 development machine with an attached instance role that allows writing to IoT core thing endpoint.
+
+
+## Installation
+
+* After you have cloned the repository or copied the files to your device (optional) change directory into the `stem-demo` folder and run `pip3 install -r requirements.txt`
+
+## Verify your IAM access
+
+In order to verify that your instance profile, IAM user, or IAM role has the proper access run the following commands:
+
+```sh
+# check your authentication
+aws sts get-caller-identity
+# {
+#     "UserId": "<access_key:<email>",
+#     "Account": "<account_number",
+#     "Arn": "arn:aws:sts::<account>:assumed-role/<role_details>"
+# }
+# make sure you can retrieve the endpoint for your IoT thing from your local machine, device, or ec2
+# if you receive an error you don't have an endpoint or your IAM access is not correct
+
+aws iot describe-endpoint
+# <endpoint_id>.iot.<region>.amazonaws.com
+
+
+```
 
 ## Running the code
 

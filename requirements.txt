@@ -1,0 +1,3 @@
+boto3
+awsiotsdk
+awscrt==0.19.19
