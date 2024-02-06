@@ -35,6 +35,7 @@ import boto3
 # globals
 #
 
+# use the session variable below if you are running this code on a local machine
 session = boto3.Session(profile_name='cmgs-prod', region_name='us-east-2')
 TOPIC_BASE = 'dt/sensor'
 REGION = 'us-east-2'
@@ -46,6 +47,17 @@ C_IOT_DATA = session.client(
     region_name=REGION,
     endpoint_url=f'https://{DATA_ENDPOINT}'
 )
+
+# use this boto configuration for running on an EC2 (Cloud9) instance. 
+# Your instance must have the proper IAM policies attached to the instance role
+#
+# DATA_ENDPOINT = boto3.client('iot', region_name=REGION).describe_endpoint(
+#     endpointType='iot:Data-ATS')['endpointAddress']
+# C_IOT_DATA = boto3.client(
+#     'iot-data',
+#     region_name=REGION,
+#     endpoint_url=f'https://{DATA_ENDPOINT}'
+# )
 
 SENSORS = {
     'sensor_01': {'building': 'BGE', 'room': 'Hanks'},
