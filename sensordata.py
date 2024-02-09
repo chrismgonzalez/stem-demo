@@ -51,7 +51,7 @@ REGION = 'us-east-2'
 
 # use this boto configuration for running on an EC2 (Cloud9) instance. 
 # Your instance must have the proper IAM policies attached to the instance role
-#
+
 DATA_ENDPOINT = boto3.client('iot', region_name=REGION).describe_endpoint(
     endpointType='iot:Data-ATS')['endpointAddress']
 C_IOT_DATA = boto3.client(
@@ -61,14 +61,9 @@ C_IOT_DATA = boto3.client(
 )
 
 SENSORS = {
-    'sensor_01': {'building': 'BGE', 'room': 'Hanks'},
+    'sensor_01': {'building': 'BGE', 'room': 'Hanks'}, # change the room name to something different if you want
     'sensor_02': {'building': 'BGE', 'room': 'Whitacre'},
-    'sensor_03': {'building': 'BGE', 'room': 'Smith'},
-    'sensor_04': {'building': 'BGE', 'room': 'Williams'},
-    'sensor_05': {'building': 'BGE', 'room': 'Parker'},
-    'sensor_06': {'building': 'SMG', 'room': 'Gonzalez'},
-    'sensor_07': {'building': 'SMG', 'room': 'Deal'},
-    'sensor_08': {'building': 'SMG', 'room': 'Curry'},
+    'sensor_03': {'building': 'SMG', 'room': 'Gonzalez'},
 }
 
 #
@@ -87,7 +82,7 @@ def sensor_data():
     message = {}
     message['temperature'] = random.uniform(33, 35)
     message['humidity'] = random.uniform(68, 70)
-    message['pressure'] = random.uniform(1145, 1150)
+    message['pressure'] = random.uniform(1145, 1147)
 
     return message
 
@@ -108,7 +103,7 @@ def send_sensor_data(thing):
         except Exception as error:
             logger.error("%s", error)
 
-        time.sleep(2)
+        time.sleep(60)
 
 
 for sensor in SENSORS.keys():

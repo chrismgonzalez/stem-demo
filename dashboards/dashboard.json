@@ -1,0 +1,560 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 12,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "panels": [],
+      "title": "Temperature, Humidity, Pressure",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-timestream-datasource",
+        "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Humidity",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 39,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "measure_value::double"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.0-66145",
+      "targets": [
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "measure": "humidity",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \r\nWHERE measure_name = 'humidity' AND room = 'Hanks'\r\nAND time between ago(15m) and now()\r\nORDER BY time \r\nDESC LIMIT 50",
+          "refId": "Hanks",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "humidity",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \r\nWHERE measure_name = 'humidity' AND room = 'Gonzalez'\r\nAND time between ago(15m) and now()\r\nORDER BY time \r\nDESC LIMIT 50",
+          "refId": "B",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "temperature",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'humidity' AND room = 'Whitacre'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "A",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        }
+      ],
+      "title": "Humidity",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-timestream-datasource",
+        "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 40,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "measure": "pressure",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'pressure' AND room = 'Gonzalez'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "A",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "pressure",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'pressure' AND room = 'Hanks'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "B",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "pressure",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'pressure' AND room = 'Whitacre'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "C",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        }
+      ],
+      "title": "Pressure",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-timestream-datasource",
+        "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "Temperature",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 28,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 7,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "displayName": "Temperature",
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "fahrenheit",
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Temperature"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.4.0-65875",
+      "targets": [
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "measure": "temperature",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'temperature' AND room = 'Hanks'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "A",
+          "table": "\"TimestreamTable-l54viVXuxSVm\"",
+          "waitForResult": false
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "temperature",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'temperature' AND room = 'Gonzalez'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "B",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        },
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "hide": false,
+          "measure": "temperature",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" \nWHERE measure_name = 'temperature' AND room = 'Whitacre'\nAND time between ago(15m) and now()\nORDER BY time \nDESC LIMIT 50",
+          "refId": "C",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        }
+      ],
+      "title": "Average Temperatures",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 3,
+      "panels": [],
+      "title": "All timeseries data - combined",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-timestream-datasource",
+        "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 21,
+        "x": 0,
+        "y": 18
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.4.0-65875",
+      "targets": [
+        {
+          "database": "\"TimestreamDataBase-5Q4JAkuI1q9a\"",
+          "datasource": {
+            "type": "grafana-timestream-datasource",
+            "uid": "e40b635c-e12e-4733-8f2f-e408fbe82a79"
+          },
+          "measure": "temperature",
+          "rawQuery": "SELECT * FROM \"TimestreamDataBase-5Q4JAkuI1q9a\".\"TimestreamTable-l54viVXuxSVm\" WHERE time between ago(30m) and now() ORDER BY time DESC LIMIT 50",
+          "refId": "A",
+          "table": "\"TimestreamTable-l54viVXuxSVm\""
+        }
+      ],
+      "title": "Table View -- All Data",
+      "transformations": [],
+      "type": "table"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "BGE Stem Night 2024",
+  "uid": "a2198e12-8771-4e17-80b9-4e48c8353a03",
+  "version": 19,
+  "weekStart": ""
+}
